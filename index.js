@@ -8,7 +8,10 @@ const actions = document.querySelector('.actions');
 
 
 
+
 addTask.addEventListener('click', insertTask);
+
+
 
 
 
@@ -45,6 +48,18 @@ function insertTask(e) {
 
             span.classList.toggle('done');
             taskList.classList.toggle('checked');
+            span.classList.toggle('compeleted');
+
+            if (span.classList.contains('done')) {
+
+                count.innerHTML--;
+            }
+            if (!span.classList.contains('done')) {
+
+                count.innerHTML++;
+
+
+            }
 
 
         }
@@ -53,8 +68,12 @@ function insertTask(e) {
 
         function countDown() {
 
-            count.textContent--;
             taskList.parentElement.remove();
+
+            if (!span.classList.contains('done')) {
+
+                count.innerHTML--;
+            }
 
 
         }
@@ -62,42 +81,84 @@ function insertTask(e) {
 
 
 
-
-        const active = document.querySelector('.active');
-
-        active.addEventListener('click', activeTasks);
-
-        function activeTasks() {
+        actions.addEventListener('click', filter);
 
 
-            if (span.classList.contains('done')) {
 
-                taskList.parentElement.classList.add('hide');
+        function filter(e) {
+
+
+            const target = e.target;
+            if (target.classList.contains('active')) {
+
+
+
+
+
+                if (span.classList.contains('done')) {
+
+
+                    span.parentElement.classList.add('hide');
+
+
+
+
+                }
+                if (!span.classList.contains('done')) {
+
+
+                    span.parentElement.classList.remove('hide');
+
+                }
+                if (span.classList.contains('done')) {
+
+
+                }
+
+
+            }
+            if (target.classList.contains('all')) {
+
+
+
+
+                span.parentElement.classList.remove('hide');
+
 
 
             }
 
-        }
 
 
-        const all = document.querySelector('.all')
-        all.addEventListener('click', allTasks);
-
-        function allTasks() {
-
-            taskList.parentElement.classList.remove('hide');
+            if (target.classList.contains('completed')) {
 
 
-        }
 
-        const completed = document.querySelector('.completed');
-        completed.addEventListener('click', finishedTasks);
+                if (!span.classList.contains('done')) {
 
-        function finishedTasks() {
+                    span.parentElement.classList.add('hide');
 
-            if (!span.classList.contains('done')) {
+                }
+                if (span.classList.contains('done')) {
 
-                taskList.parentElement.classList.add('hide');
+
+                    span.parentElement.classList.remove('hide');
+
+                }
+
+
+            }
+
+            if (target.classList.contains('clear-completed')) {
+
+                if (span.classList.contains('done')) {
+
+
+                    span.parentElement.remove();
+
+                }
+
+
 
             }
 
@@ -107,7 +168,6 @@ function insertTask(e) {
 
 
     }
-
 
 
 }
