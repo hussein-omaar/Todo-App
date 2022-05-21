@@ -18,6 +18,8 @@ addTask.addEventListener('click', insertTask);
 function insertTask(e) {
 
     e.preventDefault();
+     localStorage.setItem("myTask", inputTask.value);
+
 
 
     if (inputTask.value == "") {
