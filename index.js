@@ -1,34 +1,30 @@
+//Selectors
 const form = document.querySelector('form');
 const addTask = document.querySelector('.add-task');
 const inputTask = document.querySelector('.input-task');
 const TaskWraper = document.querySelector('.tasks-wrapper');
 const count = document.querySelector('.count');
 const actions = document.querySelector('.actions');
+let tasksCounter = 1;
 
 
-
-
-
+//EventListener
 addTask.addEventListener('click', insertTask);
 
 
-
-
-
+//Function
 function insertTask(e) {
 
     e.preventDefault();
-     localStorage.setItem("myTask", inputTask.value);
-
+    let mainKey = "Task_" + tasksCounter;
+     localStorage.setItem(mainKey, inputTask.value);
+    tasksCounter++;
 
 
     if (inputTask.value == "") {
 
         return false;
     } else {
-
-
-
         const unorderedList = document.createElement('ul');
         const span = document.createElement('span');
         const close = document.createElement('del')
@@ -45,9 +41,7 @@ function insertTask(e) {
 
         span.addEventListener('click', tick);
 
-
         function tick() {
-
             span.classList.toggle('done');
             taskList.classList.toggle('checked');
             span.classList.toggle('compeleted');
@@ -59,13 +53,8 @@ function insertTask(e) {
             if (!span.classList.contains('done')) {
 
                 count.innerHTML++;
-
-
             }
-
-
         }
-
         close.addEventListener('click', countDown);
 
         function countDown() {
@@ -76,79 +65,39 @@ function insertTask(e) {
 
                 count.innerHTML--;
             }
-
-
         }
-
-
-
-
         actions.addEventListener('click', filter);
 
-
-
         function filter(e) {
-
 
             const target = e.target;
             if (target.classList.contains('active')) {
 
-
-
-
-
                 if (span.classList.contains('done')) {
-
 
                     span.parentElement.classList.add('hide');
-
-
-
-
                 }
                 if (!span.classList.contains('done')) {
-
-
                     span.parentElement.classList.remove('hide');
-
                 }
                 if (span.classList.contains('done')) {
 
-
                 }
-
 
             }
             if (target.classList.contains('all')) {
 
-
-
-
                 span.parentElement.classList.remove('hide');
-
-
-
             }
-
-
-
             if (target.classList.contains('completed')) {
-
-
 
                 if (!span.classList.contains('done')) {
 
                     span.parentElement.classList.add('hide');
-
                 }
                 if (span.classList.contains('done')) {
-
-
                     span.parentElement.classList.remove('hide');
-
                 }
-
-
             }
 
             if (target.classList.contains('clear-completed')) {
@@ -157,19 +106,11 @@ function insertTask(e) {
 
 
                     span.parentElement.remove();
-
                 }
-
-
-
             }
-
 
         }
 
-
-
     }
-
 
 }
