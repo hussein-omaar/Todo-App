@@ -16,15 +16,20 @@ addTask.addEventListener('click', insertTask);
 function insertTask(e) {
 
     e.preventDefault();
-    let mainKey = "Task_" + tasksCounter;
-     localStorage.setItem(mainKey, inputTask.value);
-    tasksCounter++;
-
 
     if (inputTask.value == "") {
 
         return false;
     } else {
+        
+        
+        //Add Input to Local Storage
+        let mainKey = "Task_" + tasksCounter;
+        localStorage.setItem(mainKey, inputTask.value);
+        tasksCounter++;
+        
+        
+        //Selectors
         const unorderedList = document.createElement('ul');
         const span = document.createElement('span');
         const close = document.createElement('del')
